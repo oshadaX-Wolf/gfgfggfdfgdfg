@@ -6,7 +6,7 @@
     "start": "node index.js"
   },
   "dependencies": {
-    "@whiskeysockets/baileys": "^7.0.0",
+    "@whiskeysockets/baileys": "^6.0.0",
     "btch-downloader": "^1.0.0",
     "chalk": "^4.1.2",
     "express": "^4.17.1",
