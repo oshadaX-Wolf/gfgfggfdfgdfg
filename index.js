@@ -1,6 +1,8 @@
 const { default: makeWASocket, useSingleFileAuthState, MessageType, MessageOptions, WA_DEFAULT_EPHEMERAL } = require('@whiskeysockets/baileys');
 const { Boom } = require('@hapi/boom');
+const { useSingleFileAuthState } = require('@whiskeysockets/baileys');
 const { state, saveState } = useSingleFileAuthState('./auth_info.json');
+
 const qrcode = require('qrcode-terminal');
 
 async function connectToWhatsApp() {
