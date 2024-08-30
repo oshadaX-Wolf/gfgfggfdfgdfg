@@ -11,18 +11,19 @@ async function connectToWhatsApp() {
 
     sock.ev.on('creds.update', saveState);
 
-    sock.ev.on('connection.update', (update) => {
-        const { connection, lastDisconnect } = update;
-        if (connection === 'close') {
-            const shouldReconnect = (lastDisconnect.error as Boom)?.output?.statusCode !== 401;
-            console.log('connection closed due to ', lastDisconnect.error, ', reconnecting ', shouldReconnect);
-            if (shouldReconnect) {
-                connectToWhatsApp();
-            }
-        } else if (connection === 'open') {
-            console.log('opened connection');
+sock.ev.on('connection.update', (update) => {
+    const { connection, lastDisconnect } = update;
+    if (connection === 'close') {
+        const shouldReconnect = lastDisconnect?.error?.output?.statusCode !== 401;
+        console.log('connection closed due to ', lastDisconnect.error, ', reconnecting ', shouldReconnect);
+        if (shouldReconnect) {
+            connectToWhatsApp();
         }
-    });
+    } else if (connection === 'open') {
+        console.log('opened connection');
+    }
+});
+
 
     sock.ev.on('messages.upsert', async (m) => {
         const msg = m.messages[0];
